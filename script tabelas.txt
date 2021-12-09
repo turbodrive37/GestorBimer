@@ -1,0 +1,53 @@
+drop table tbl_funcionarios;
+Create table tbl_funcionarios
+(
+    idfuncionario int IDENTITY(1,1) PRIMARY KEY,
+nome varchar(150),
+login varchar(10),
+senha varchar(30),
+funcao varchar(30),
+salario numeric(12,2),
+dataadmissao date,
+datadesligamento date,
+observacao text,
+foto varbinary(max) not null
+);
+
+Create unique index idx_id on tbl_funcionarios (idfuncionario);
+insert into tbl_funcionarios (nome, login, senha, funcao, dataadmissao) values ('DBA', 'SENSEI', '1234', 'Programador', '2021-12-06');
+
+Create table tbl_funcoes
+(
+    idfuncoes int IDENTITY(1,1) PRIMARY KEY,
+    nome varchar(50),
+    corgrafico varchar(16)
+);
+Create unique index idx_id on tbl_funcoes (idfuncoes);
+insert into tbl_funcoes (nome, corgrafico) values ('Programador', '$0000ff');
+insert into tbl_funcoes (nome, corgrafico) values ('Qualidade', '$99ccff');
+insert into tbl_funcoes (nome, corgrafico) values ('Especialista', '$0066ff');
+insert into tbl_funcoes (nome, corgrafico) values ('Supervisor', '$336600');
+insert into tbl_funcoes (nome, corgrafico) values ('P.O.', '$003399');
+insert into tbl_funcoes (nome, corgrafico) values ('Scrum Master', '$99ff66');
+insert into tbl_funcoes (nome, corgrafico) values ('Comercial', '$00ffff');
+
+Create table tbl_parecer
+(
+    idparecer int IDENTITY(1,1) PRIMARY KEY,
+  idfuncionario int default 0,
+    tipo varchar(30),
+    dataparecer date,
+descricao text
+);
+Create unique index idx_id on tbl_parecer (idparecer);
+
+Create table tbl_tiposparecer
+(
+    idtipos int IDENTITY(1,1) PRIMARY KEY,
+    nome varchar(30)
+); 
+Create unique index idx_id on tbl_tiposparecer (idtipos);
+insert into tbl_tiposparecer (nome) values ('Destaque');
+insert into tbl_tiposparecer (nome) values ('Falta não justificada');
+insert into tbl_tiposparecer (nome) values ('Consulta Médica');
+insert into tbl_tiposparecer (nome) values ('Outros');
